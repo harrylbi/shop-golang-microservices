@@ -1,5 +1,6 @@
-services:
+version: '3.8'
 
+services:
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq
@@ -58,6 +59,56 @@ services:
       - "8889:8889"
     depends_on:
       - jaeger
+    networks:
+      - shop
+
+  identity-service:
+    build:
+      context: ../../
+      dockerfile: internal/services/identity_service/Dockerfile
+    container_name: identity-service
+    ports:
+      - "5002:5002"
+      - "6602:6600"
+    environment:
+      - APP_ENV=docker
+    depends_on:
+      - postgres
+      - rabbitmq
+      - otel-collector
+    networks:
+      - shop
+
+  product-service:
+    build:
+      context: ../../
+      dockerfile: internal/services/product_service/Dockerfile
+    container_name: product-service
+    ports:
+      - "5000:5000"
+      - "6601:6600"
+    environment:
+      - APP_ENV=docker
+    depends_on:
+      - postgres
+      - rabbitmq
+      - otel-collector
+    networks:
+      - shop
+
+  inventory-service:
+    build:
+      context: ../../
+      dockerfile: internal/services/inventory_service/Dockerfile
+    container_name: inventory-service
+    ports:
+      - "5004:5004"
+    environment:
+      - APP_ENV=docker
+    depends_on:
+      - postgres
+      - rabbitmq
+      - otel-collector
     networks:
       - shop
 
