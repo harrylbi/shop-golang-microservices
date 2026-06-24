@@ -13,13 +13,29 @@ run_identities_service:
 
 # ==============================================================================
 # Docker Compose
+docker-compose_up:
+	@echo Starting all docker-compose up
+	docker-compose -f deployments/docker-compose/docker-compose.yaml up --build
+
+docker-compose_down:
+	@echo Stopping all docker-compose down
+	docker-compose -f deployments/docker-compose/docker-compose.yaml down
+
 docker-compose_infra_up:
 	@echo Starting infrastructure docker-compose up
 	docker-compose -f deployments/docker-compose/infrastructure.yaml up --build
 
 docker-compose_infra_down:
-	@echo Stoping infrastructure docker-compose down
+	@echo Stopping infrastructure docker-compose down
 	docker-compose -f deployments/docker-compose/infrastructure.yaml down
+
+docker-compose_services_up:
+	@echo Starting services docker-compose up
+	docker-compose -f deployments/docker-compose/services.yaml up --build
+
+docker-compose_services_down:
+	@echo Stopping services docker-compose down
+	docker-compose -f deployments/docker-compose/services.yaml down
 
 ## choco install protoc
 ## go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
