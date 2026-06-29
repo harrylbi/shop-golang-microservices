@@ -10,11 +10,17 @@ import (
 	"github.com/meysamhadeli/shop-golang-microservices/internal/pkg/utils"
 	dtosv1 "github.com/meysamhadeli/shop-golang-microservices/internal/services/product_service/product/features/searching_product/v1/dtos"
 	"net/http"
+	"os"
 )
 
 func MapRoute(validator *validator.Validate, log logger.ILogger, echo *echo.Echo, ctx context.Context) {
 	group := echo.Group("/api/v1/products")
-	group.GET("/search", searchProducts(validator, log, ctx), echomiddleware.ValidateBearerToken())
+	// JWT disabled temporarily for observability and MTTR experiments (set DISABLE_AUTH=true to bypass)
+	if os.Getenv("DISABLE_AUTH") == "true" {
+		group.GET("/search", searchProducts(validator, log, ctx))
+	} else {
+		group.GET("/search", searchProducts(validator, log, ctx), echomiddleware.ValidateBearerToken())
+	}
 }
 
 // SearchProducts

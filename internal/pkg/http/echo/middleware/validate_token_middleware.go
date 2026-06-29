@@ -21,6 +21,12 @@ func ValidateBearerToken() echo.MiddlewareFunc {
 				return next(c)
 			}
 
+			// JWT disabled temporarily for observability and MTTR experiments
+			// Set DISABLE_AUTH=true to bypass JWT validation (e.g. in Docker Compose for research)
+			if os.Getenv("DISABLE_AUTH") == "true" {
+				return next(c)
+			}
+
 			// Parse and verify jwt access token
 			auth, ok := bearerAuth(c.Request())
 			if !ok {

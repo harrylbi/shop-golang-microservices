@@ -11,11 +11,17 @@ import (
 	dtosv1 "github.com/meysamhadeli/shop-golang-microservices/internal/services/identity_service/identity/features/registering_user/v1/dtos"
 	"github.com/pkg/errors"
 	"net/http"
+	"os"
 )
 
 func MapRoute(validator *validator.Validate, log logger.ILogger, echo *echo.Echo, ctx context.Context) {
 	group := echo.Group("/api/v1/users")
-	group.POST("", createUser(validator, log, ctx), echomiddleware.ValidateBearerToken())
+	// JWT disabled temporarily for observability and MTTR experiments (set DISABLE_AUTH=true to bypass)
+	if os.Getenv("DISABLE_AUTH") == "true" {
+		group.POST("", createUser(validator, log, ctx))
+	} else {
+		group.POST("", createUser(validator, log, ctx), echomiddleware.ValidateBearerToken())
+	}
 }
 
 // RegisterUser

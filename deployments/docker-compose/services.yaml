@@ -9,6 +9,8 @@ services:
       - "5002:5002"
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      # JWT disabled temporarily for observability and MTTR experiments
+      DISABLE_AUTH: "true"
     depends_on:
       - postgres
       - rabbitmq
@@ -25,6 +27,8 @@ services:
       - "5004:5004"
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      # JWT disabled temporarily for observability and MTTR experiments
+      DISABLE_AUTH: "true"
     depends_on:
       - postgres
       - rabbitmq
@@ -41,6 +45,8 @@ services:
       - "5000:5000"
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      # JWT disabled temporarily for observability and MTTR experiments
+      DISABLE_AUTH: "true"
     depends_on:
       - postgres
       - rabbitmq
