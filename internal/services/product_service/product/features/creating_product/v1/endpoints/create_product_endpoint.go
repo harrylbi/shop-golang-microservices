@@ -38,7 +38,6 @@ func MapRoute(validator *validator.Validate, log logger.ILogger, echo *echo.Echo
 // @Success     201                     {object} dtos.CreateProductResponseDto
 // @Security ApiKeyAuth
 // @Router      /api/v1/products [post]
-// @Router      /orders [post]
 func createProduct(validator *validator.Validate, log logger.ILogger, ctx context.Context) echo.HandlerFunc {
 	return func(c echo.Context) error {
 
