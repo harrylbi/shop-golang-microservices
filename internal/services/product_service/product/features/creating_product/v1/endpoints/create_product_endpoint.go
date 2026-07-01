@@ -12,6 +12,10 @@ import (
 	"github.com/pkg/errors"
 	"net/http"
 	"os"
+
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
 )
 
 func MapRoute(validator *validator.Validate, log logger.ILogger, echo *echo.Echo, ctx context.Context) {
@@ -34,8 +38,27 @@ func MapRoute(validator *validator.Validate, log logger.ILogger, echo *echo.Echo
 // @Success     201                     {object} dtos.CreateProductResponseDto
 // @Security ApiKeyAuth
 // @Router      /api/v1/products [post]
+// @Router      /orders [post]
 func createProduct(validator *validator.Validate, log logger.ILogger, ctx context.Context) echo.HandlerFunc {
 	return func(c echo.Context) error {
+
+		span := trace.SpanFromContext(c.Request().Context())
+
+		// Skenario 3 — RabbitMQ Failure
+		if os.Getenv("SIMULATE_RABBITMQ_FAILURE") == "true" {
+			span.SetStatus(codes.Error, "message publish failed")
+			span.SetAttributes(
+				attribute.String("incident.type", "messaging_failure"),
+				attribute.String("messaging.system", "rabbitmq"),
+				attribute.Bool("error", true),
+			)
+			span.AddEvent("rabbitmq_publish_failed")
+
+			return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+				"success": false,
+				"message": "message publish failed",
+			})
+		}
 
 		request := &dtosv1.CreateProductRequestDto{}
 

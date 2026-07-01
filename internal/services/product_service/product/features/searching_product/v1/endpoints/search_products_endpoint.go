@@ -2,6 +2,9 @@ package endpoints
 
 import (
 	"context"
+	"net/http"
+	"os"
+
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
 	"github.com/mehdihadeli/go-mediatr"
@@ -9,8 +12,6 @@ import (
 	"github.com/meysamhadeli/shop-golang-microservices/internal/pkg/logger"
 	"github.com/meysamhadeli/shop-golang-microservices/internal/pkg/utils"
 	dtosv1 "github.com/meysamhadeli/shop-golang-microservices/internal/services/product_service/product/features/searching_product/v1/dtos"
-	"net/http"
-	"os"
 )
 
 func MapRoute(validator *validator.Validate, log logger.ILogger, echo *echo.Echo, ctx context.Context) {

@@ -47,6 +47,8 @@ services:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
       # JWT disabled temporarily for observability and MTTR experiments
       DISABLE_AUTH: "true"
+      # Debug endpoints for incident simulation (HTTP 500, latency, panic, db-timeout)
+      ENABLE_DEBUG: "true"
     depends_on:
       - postgres
       - rabbitmq
