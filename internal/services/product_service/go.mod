@@ -1,6 +1,6 @@
 module github.com/meysamhadeli/shop-golang-microservices/internal/services/product_service
 
-go 1.23.2
+go 1.25.0
 
 replace github.com/meysamhadeli/shop-golang-microservices/internal/pkg => ../../pkg
 
