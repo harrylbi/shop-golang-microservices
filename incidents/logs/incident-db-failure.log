@@ -1,0 +1,17 @@
+=== DB Failure Simulation — 2026-07-02T12:23:47+07:00 ===
+Target: http://localhost:5000/api/v1/products
+Repeat: 5 kali
+---
+[12:23:47] Request #1 — HTTP 500
+  Body: {"message":"database unavailable","success":false}
+[12:23:48] Request #2 — HTTP 500
+  Body: {"message":"database unavailable","success":false}
+[12:23:48] Request #3 — HTTP 500
+  Body: {"message":"database unavailable","success":false}
+[12:23:48] Request #4 — HTTP 500
+  Body: {"message":"database unavailable","success":false}
+[12:23:49] Request #5 — HTTP 500
+  Body: {"message":"database unavailable","success":false}
+---
+Summary: 5 / 5 request returned HTTP 500
+Log saved: 2026-07-02T12:23:49+07:00

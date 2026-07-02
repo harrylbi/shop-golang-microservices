@@ -1,0 +1,53 @@
+=== Retry Storm Simulation — 2026-07-02T12:47:55+07:00 ===
+Parallel: 10 requests per round
+Rounds: 3
+
+[Phase 1] docker stop rabbitmq
+rabbitmq
+
+[Phase 2] Retry storm
+  Round 1 — 2026-07-02T12:48:01+07:00
+    [R1-1] HTTP 400
+    [R1-6] HTTP 400
+    [R1-3] HTTP 400
+    [R1-4] HTTP 400
+    [R1-9] HTTP 400
+    [R1-2] HTTP 400
+    [R1-8] HTTP 400
+    [R1-10] HTTP 400
+    [R1-5] HTTP 400
+    [R1-7] HTTP 400
+    Round 1 errors: 10/10
+  Round 2 — 2026-07-02T12:48:02+07:00
+    [R2-6] HTTP 400
+    [R2-9] HTTP 400
+    [R2-8] HTTP 400
+    [R2-3] HTTP 400
+    [R2-10] HTTP 400
+    [R2-1] HTTP 400
+    [R2-5] HTTP 400
+    [R2-7] HTTP 400
+    [R2-2] HTTP 400
+    [R2-4] HTTP 400
+    Round 2 errors: 10/10
+  Round 3 — 2026-07-02T12:48:03+07:00
+    [R3-5] HTTP 400
+    [R3-4] HTTP 400
+    [R3-8] HTTP 400
+    [R3-1] HTTP 400
+    [R3-2] HTTP 400
+    [R3-6] HTTP 400
+    [R3-3] HTTP 400
+    [R3-10] HTTP 400
+    [R3-9] HTTP 400
+    [R3-7] HTTP 400
+    Round 3 errors: 10/10
+
+[Phase 3] docker start rabbitmq
+rabbitmq
+
+---
+Summary:
+  Total requests: 30
+  Total errors: 30
+Log saved: 2026-07-02T12:48:15+07:00

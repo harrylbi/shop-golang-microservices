@@ -1,0 +1,50 @@
+=== Realistic Latency Simulation — 2026-07-02T12:13:25+07:00 ===
+Repeat per scenario: 3
+---
+[Skenario 1] Slow Database Query
+[12:13:31] #1 GET /api/v1/products (slow DB) — HTTP 200 — 5019ms
+[12:13:36] #2 GET /api/v1/products (slow DB) — HTTP 200 — 5039ms
+[12:13:42] #3 GET /api/v1/products (slow DB) — HTTP 200 — 5032ms
+[Skenario 2] Inter-service Communication
+[12:13:42] #1 POST /api/v1/products (inter-service) — HTTP 201 — 24ms
+[12:13:43] #2 POST /api/v1/products (inter-service) — HTTP 201 — 40ms
+[12:13:43] #3 POST /api/v1/products (inter-service) — HTTP 201 — 61ms
+[Skenario 3] RabbitMQ Queue Buildup
+[12:13:43] #2 POST burst (queue buildup) — HTTP 201 — 53ms
+[12:13:43] #3 POST burst (queue buildup) — HTTP 201 — 55ms
+[12:13:43] #1 POST burst (queue buildup) — HTTP 201 — 66ms
+[12:13:43] #4 POST burst (queue buildup) — HTTP 201 — 33ms
+[12:13:43] #5 POST burst (queue buildup) — HTTP 201 — 33ms
+[12:13:43] #6 POST burst (queue buildup) — HTTP 201 — 32ms
+[12:13:43] #8 POST burst (queue buildup) — HTTP 201 — 23ms
+[12:13:43] #7 POST burst (queue buildup) — HTTP 201 — 37ms
+[12:13:43] #9 POST burst (queue buildup) — HTTP 201 — 37ms
+[Skenario 4] Resource Contention (CPU)
+[12:13:49] #1 GET /api/v1/products (CPU contention) — HTTP 200 — 5033ms
+[12:13:55] #2 GET /api/v1/products (CPU contention) — HTTP 200 — 5022ms
+[12:14:00] #3 GET /api/v1/products (CPU contention) — HTTP 200 — 5028ms
+[Skenario 5] Cascading Latency
+[12:14:06] baseline GET products — HTTP 200 — 5055ms
+[12:14:06] baseline POST products — HTTP 201 — 27ms
+  [Phase B] docker stop identity-service
+[12:14:11] #1 POST cascade (identity down) — HTTP 201 — 38ms
+[12:14:12] #2 POST cascade (identity down) — HTTP 201 — 42ms
+[12:14:13] #3 POST cascade (identity down) — HTTP 201 — 41ms
+[12:14:19] #1 GET products (identity down) — HTTP 200 — 5034ms
+[12:14:25] #2 GET products (identity down) — HTTP 200 — 5021ms
+[12:14:30] #3 GET products (identity down) — HTTP 200 — 5029ms
+  [Phase C] docker start identity-service
+[12:14:46] recovery POST products — HTTP 201 — 38ms
+[Skenario 6] Combined Traffic Storm
+[12:14:51] #1 GET by ID storm — HTTP 200 — 29ms
+[12:14:51] #4 GET by ID storm — HTTP 200 — 37ms
+[12:14:51] #3 POST storm — HTTP 201 — 308ms
+[12:14:56] #2 GET list storm — HTTP 200 — 5029ms
+[12:14:56] #6 POST storm — HTTP 201 — 30ms
+[12:15:01] #5 GET list storm — HTTP 200 — 5024ms
+---
+Summary:
+  Total requests: 18
+  Slow requests (above threshold): 10
+  Error requests (HTTP 5xx): 0
+Log saved: 2026-07-02T12:15:01+07:00

@@ -1,0 +1,11 @@
+=== Slow Query Simulation — 2026-07-02T12:28:16+07:00 ===
+Target: http://localhost:5000/api/v1/products
+Repeat: 5 kali
+---
+[12:28:21] Request #1 — HTTP 200 — 5033ms
+[12:28:27] Request #2 — HTTP 200 — 5045ms
+[12:28:32] Request #3 — HTTP 200 — 5022ms
+[12:28:38] Request #4 — HTTP 200 — 5048ms
+[12:28:43] Request #5 — HTTP 200 — 5039ms
+---
+Summary: 5 / 5 request were slow (>4s)

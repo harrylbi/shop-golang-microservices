@@ -50,13 +50,13 @@ services:
       # ====== Fault Injection untuk MTTR Research ======
       # Aktifkan SATU skenario pada satu waktu, lalu rebuild/restart container.
       # Skenario 1: Database Failure → HTTP 500 pada GET /api/v1/products
-      SIMULATE_DB_FAILURE: "true"
+      #SIMULATE_DB_FAILURE: "true"
       # Skenario 2: Inventory Dependency Down → HTTP 500 pada GET /api/v1/products
       #SIMULATE_INVENTORY_DOWN: "true"
       # Skenario 3: RabbitMQ Publish Failed → HTTP 500 pada POST /api/v1/products
       #SIMULATE_RABBITMQ_FAILURE: "true"
       # Skenario 4: Slow Query (5s delay) → GET /api/v1/products tetap 200 tapi lambat
-      SIMULATE_SLOW_DB: "true"
+      #SIMULATE_SLOW_DB: "true"
       # Skenario 5: High CPU → GET /api/v1/products tetap 200 tapi CPU spike
       #SIMULATE_HIGH_CPU: "true"
     depends_on:

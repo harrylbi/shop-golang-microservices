@@ -1,0 +1,16 @@
+=== RabbitMQ Failure Simulation — 2026-07-02T12:34:08+07:00 ===
+Target: http://localhost:5000/api/v1/products (POST)
+Repeat: 5 kali
+---
+[12:34:08] Request #1 — HTTP 500
+  Body: {"message":"message publish failed","success":false}
+[12:34:09] Request #2 — HTTP 500
+  Body: {"message":"message publish failed","success":false}
+[12:34:09] Request #3 — HTTP 500
+  Body: {"message":"message publish failed","success":false}
+[12:34:09] Request #4 — HTTP 500
+  Body: {"message":"message publish failed","success":false}
+[12:34:10] Request #5 — HTTP 500
+  Body: {"message":"message publish failed","success":false}
+---
+Summary: 5 / 5 request returned HTTP 500
