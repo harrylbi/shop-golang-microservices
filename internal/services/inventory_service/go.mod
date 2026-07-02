@@ -1,6 +1,6 @@
 module github.com/meysamhadeli/shop-golang-microservices/internal/services/inventory_service
 
-go 1.25.0
+go 1.23.2
 
 replace github.com/meysamhadeli/shop-golang-microservices/internal/pkg => ../../pkg
 
