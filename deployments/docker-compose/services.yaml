@@ -56,7 +56,7 @@ services:
       # Skenario 3: RabbitMQ Publish Failed → HTTP 500 pada POST /api/v1/products
       #SIMULATE_RABBITMQ_FAILURE: "true"
       # Skenario 4: Slow Query (5s delay) → GET /api/v1/products tetap 200 tapi lambat
-      #SIMULATE_SLOW_DB: "true"
+      SIMULATE_SLOW_DB: "true"
       # Skenario 5: High CPU → GET /api/v1/products tetap 200 tapi CPU spike
       #SIMULATE_HIGH_CPU: "true"
     depends_on:
