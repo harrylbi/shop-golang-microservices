@@ -44,6 +44,7 @@ func main() {
 			),
 			fx.Invoke(server.RunServers),
 			fx.Invoke(configurations.ConfigMiddlewares),
+			fx.Invoke(configurations.ConfigMetrics),
 			fx.Invoke(configurations.ConfigSwagger),
 			fx.Invoke(func(gorm *gorm.DB) error {
 				err := gormpgsql.Migrate(gorm, &models.User{})
