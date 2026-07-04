@@ -24,7 +24,7 @@ func ConfigMiddlewares(e *echo.Echo, jaegerCfg *otel.JaegerConfig) {
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 		Level: constants.GzipLevel,
 		Skipper: func(c echo.Context) bool {
-			return strings.Contains(c.Request().URL.Path, "swagger")
+			return strings.Contains(c.Request().URL.Path, "swagger") || c.Request().URL.Path == "/metrics"
 		},
 	}))
 
