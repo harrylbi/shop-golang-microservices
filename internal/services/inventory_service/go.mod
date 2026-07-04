@@ -8,7 +8,6 @@ require (
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/jackc/pgx/v4 v4.16.1
-	github.com/labstack/echo-contrib v0.50.1
 	github.com/labstack/echo/v4 v4.15.0
 	github.com/meysamhadeli/problem-details v1.2.4
 	github.com/meysamhadeli/shop-golang-microservices/internal/pkg v0.0.0-00010101000000-000000000000

@@ -7,7 +7,6 @@ replace github.com/meysamhadeli/shop-golang-microservices/internal/pkg => ../../
 require (
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/jackc/pgx/v4 v4.16.1
-	github.com/labstack/echo-contrib v0.50.1
 	github.com/labstack/echo/v4 v4.15.0
 	github.com/mehdihadeli/go-mediatr v1.1.9
 	github.com/meysamhadeli/problem-details v1.2.4
