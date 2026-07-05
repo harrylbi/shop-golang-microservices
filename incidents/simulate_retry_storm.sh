@@ -68,7 +68,7 @@ for round in $(seq 1 "$ROUNDS"); do
     (
       RESP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 -X POST "$PRODUCT_BASE/api/v1/products" \
         -H "Content-Type: application/json" \
-        -d "{\"name\":\"Retry-Storm-R${round}-${j}\",\"description\":\"storm test\",\"price\":100,\"inventoryId\":1,\"count\":1}" 2>/dev/null || echo "000")
+        -d "{\"Name\":\"Retry-Storm-R${round}-${j}\",\"Description\":\"storm test\",\"Price\":100,\"InventoryId\":1,\"Count\":1}" 2>/dev/null || echo "000")
       echo "    [R$round-$j] HTTP $RESP" >> "$LOG_FILE"
       if [ "$RESP" != "201" ]; then
         echo "ERROR" >> "$LOG_DIR/.storm_errors_$$"
